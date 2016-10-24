@@ -1,0 +1,80 @@
+#  Licensed under the Apache License, Version 2.0 (the "License"); you may
+#  not use this file except in compliance with the License. You may obtain
+#  a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+#  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+#  License for the specific language governing permissions and limitations
+#  under the License.
+
+Namespaces:
+  =: io.iron
+  std: io.murano
+  docker: com.mirantis.docker
+
+Name: IronFunctions
+
+Extends: docker:DockerApplication
+
+Properties:
+  name:
+    Contract: $.string().notNull()
+
+  dockerImage:
+    Contract: $.string().notNull()
+
+  apiUrl:
+    Contract: $.string().notNull()
+
+  port:
+    Contract: $.int().notNull().check($ > 0)
+
+  numAsync:
+    Contract: $.int().notNull().check($ > 0)
+
+  logLevel:
+    Contract: $.string().notNull()
+
+  publish:
+    Contract: $.bool().notNull()
+    Default: false
+
+Methods:
+  initialize:
+    Body:
+      - $._environment: $.find(std:Environment).require()
+      - $._scope: switch($.publish, $ => public, not $ => internal)
+
+  getContainer:
+    Body:
+      - $._env : {}
+      - $._env[API_URL]: $.apiUrl
+      - $._env[PORT]: $.port
+      - $._env[NUM_ASYNC]: $.numAsync
+      - $._env[LOG_LEVEL]: $.logLevel
+
+      - Return:
+          name: $.name
+          image: $.dockerImage
+          ports:
+            - port: $.port
+              scope: $._scope
+          env: $._env
+          privileged: true
+
+  onInstallationStart:
+    Body:
+      - $._environment.reporter.report($this, 'Installing IronFunctions')
+
+  onInstallationFinish:
+    Body:
+      - If: $.publish
+        Then:
+          - $endpoints: $.applicationEndpoints.where($.scope = $this._scope).
+              select(format('{0}:{1}', $.address, $.port))
+          - $._environment.reporter.report($this, 'IronFunctions {0} is available at {1}'.format($.name, join(', ', $endpoints)))
+        Else:
+          - $._environment.reporter.report($this, 'IronFunctions {0} has deployed but is not accessible from outside'.format($.name))
