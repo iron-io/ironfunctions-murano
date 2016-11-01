@@ -52,12 +52,12 @@ Forms:
           description: "Enter docker image"
         - name: apiUrl
           type: string
-          label: API URL
+          label: API_URL
           required: false
           description: "Enter the IronFunctions API URL. (Default: http://127.0.0.1:8080)"
         - name: port
           type: string
-          label: Port
+          label: PORT
           required: false
           initial: 8080
           description: "The port to run on. (Default: 8080)"
@@ -69,7 +69,7 @@ Forms:
           description: "The number of async runners in the functions process. (Default: 1)"
         - name: logLevel
           type: string
-          label: Log level
+          label: LOG_LEVEL
           required: false
           initial: "INFO"
           description: "Set to DEBUG to enable debugging. (Default: INFO)"
