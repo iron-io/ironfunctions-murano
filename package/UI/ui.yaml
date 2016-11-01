@@ -20,6 +20,7 @@ Application:
   dockerImage: $.appConfiguration.dockerImage
   apiUrl: $.appConfiguration.apiUrl
   port: $.appConfiguration.port
+  numAsync: $.appConfiguration.numAsync
   logLevel: $.appConfiguration.logLevel
   publish: $.appConfiguration.publish
 
@@ -60,6 +61,12 @@ Forms:
           required: false
           initial: 8080
           description: "The port to run on. (Default: 8080)"
+        - name: numAsync
+          type: integer
+          label: NUM_ASYNC
+          required: false
+          initial: 1
+          description: "The number of async runners in the functions process. (Default: 1)"
         - name: logLevel
           type: string
           label: Log level

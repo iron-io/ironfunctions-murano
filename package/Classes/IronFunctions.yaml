@@ -39,6 +39,10 @@ Properties:
     Contract: $.int().notNull().check($ > 0)
     Default: 8080
 
+  numAsync:
+    Contract: $.int().notNull().check($ > 0)
+    Default: 1
+
   logLevel:
     Contract: $.string().notNull()
     Default: "INFO"
@@ -55,6 +59,7 @@ Methods:
       - $._env : {}
       - $._env[API_URL]: $.apiUrl
       - $._env[PORT]: $.port
+      - $._env[NUM_ASYNC]: $.numAsync
       - $._env[LOG_LEVEL]: $.logLevel
 
       - Return:
