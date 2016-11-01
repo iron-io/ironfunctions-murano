@@ -20,7 +20,6 @@ Application:
   dockerImage: $.appConfiguration.dockerImage
   apiUrl: $.appConfiguration.apiUrl
   port: $.appConfiguration.port
-  numAsync: $.appConfiguration.numAsync
   logLevel: $.appConfiguration.logLevel
   publish: $.appConfiguration.publish
 
@@ -36,55 +35,40 @@ Forms:
           type: string
           label: Application Name
           initial: IronFunctions
-          description: >-
-            Enter a desired name for the application. Just A-Z, a-z, 0-9, dash and
-            underline are allowed
+          description: "Enter a desired name for the application. Just A-Z, a-z, 0-9, dash and
+          underline are allowed"
         - name: host
           type:
             - com.mirantis.docker.kubernetes.KubernetesPod
             - com.mirantis.docker.DockerStandaloneHost
           label: Container Host
-          description: >-
-            Select an instance of Docker contaniner hosting provider to run the app
+          description: "Select an instance of Docker contaniner hosting provider to run the app"
         - name: dockerImage
           type: string
           label: Docker Image
           required: true
           initial: "iron/functions"
-          description: >-
-            Enter docker image
+          description: "Enter docker image"
         - name: apiUrl
           type: string
-          label: API_URL
-          required: true
-          initial: "http://127.0.0.1:8080"
-          description: >-
-            Enter the IronFunctions API URL
+          label: API URL
+          required: false
+          description: "Enter the IronFunctions API URL. (Default: http://127.0.0.1:8080)"
         - name: port
           type: string
-          label: PORT
-          required: true
+          label: Port
+          required: false
           initial: 8080
-          description: >-
-            The port to run on. (Default: 8080)
-        - name: numAsync
-          type: integer
-          label: NUM_ASYNC
-          required: true
-          initial: 1
-          description: >-
-            The number of async runners in the functions process. (Default: 1)
+          description: "The port to run on. (Default: 8080)"
         - name: logLevel
           type: string
-          label: LOG_LEVEL
-          required: true
+          label: Log level
+          required: false
           initial: "INFO"
-          description: >-
-            Set to DEBUG to enable debugging. (Default: INFO)
+          description: "Set to DEBUG to enable debugging. (Default: INFO)"
         - name: publish
           type: boolean
           label: Visible from outside
           required: false
           initial: true
-          description: >-
-            Check if you intend to access the application from the internet
+          description: "Check if you intend to access the application from the internet"
