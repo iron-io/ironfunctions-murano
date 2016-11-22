@@ -45,8 +45,13 @@ Properties:
 
   logLevel:
     Contract: $.string().notNull()
-    Default: "INFO"
+    Default: 'INFO'
 
+  dbUrl:
+    Contract: $.string().notNull()
+
+  mqUrl:
+    Contract: $.string().notNull()
 
 Methods:
   .init:
@@ -56,11 +61,12 @@ Methods:
 
   getContainer:
     Body:
-      - $._env : {}
+      - $._env: {}
       - $._env[API_URL]: $.apiUrl
       - $._env[PORT]: $.port
-      - $._env[NUM_ASYNC]: $.numAsync
       - $._env[LOG_LEVEL]: $.logLevel
+      - $_.env[DB_URL]: $.dbUrl
+      - $_.env[MQ_URL]: $.mqUrl
 
       - Return:
           name: $.name
