@@ -39,19 +39,15 @@ Properties:
     Contract: $.int().notNull().check($ > 0)
     Default: 8080
 
-  numAsync:
-    Contract: $.int().notNull().check($ > 0)
-    Default: 1
-
   logLevel:
     Contract: $.string().notNull()
     Default: 'INFO'
 
   dbUrl:
-    Contract: $.string().notNull()
+    Contract: $.string()
 
   mqUrl:
-    Contract: $.string().notNull()
+    Contract: $.string()
 
 Methods:
   .init:
