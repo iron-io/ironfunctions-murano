@@ -39,14 +39,15 @@ Properties:
     Contract: $.int().notNull().check($ > 0)
     Default: 8080
 
-  numAsync:
-    Contract: $.int().notNull().check($ > 0)
-    Default: 1
-
   logLevel:
     Contract: $.string().notNull()
-    Default: "INFO"
+    Default: 'INFO'
 
+  dbUrl:
+    Contract: $.string()
+
+  mqUrl:
+    Contract: $.string()
 
 Methods:
   .init:
@@ -56,11 +57,12 @@ Methods:
 
   getContainer:
     Body:
-      - $._env : {}
+      - $._env: {}
       - $._env[API_URL]: $.apiUrl
       - $._env[PORT]: $.port
-      - $._env[NUM_ASYNC]: $.numAsync
       - $._env[LOG_LEVEL]: $.logLevel
+      - $_.env[DB_URL]: $.dbUrl
+      - $_.env[MQ_URL]: $.mqUrl
 
       - Return:
           name: $.name

@@ -20,8 +20,9 @@ Application:
   dockerImage: $.appConfiguration.dockerImage
   apiUrl: $.appConfiguration.apiUrl
   port: $.appConfiguration.port
-  numAsync: $.appConfiguration.numAsync
   logLevel: $.appConfiguration.logLevel
+  dbUrl: $.appConfiguration.dbUrl
+  mqUrl: $.appConfiguration.mqUrl
   publish: $.appConfiguration.publish
 
 Forms:
@@ -43,36 +44,40 @@ Forms:
             - com.mirantis.docker.kubernetes.KubernetesPod
             - com.mirantis.docker.DockerStandaloneHost
           label: Container Host
-          description: "Select an instance of Docker contaniner hosting provider to run the app"
+          description: "Select an instance of Docker to run the app"
         - name: dockerImage
           type: string
           label: Docker Image
           required: true
           initial: "iron/functions"
-          description: "Enter docker image"
+          description: "The Docker image name for the app"
         - name: apiUrl
           type: string
           label: API_URL
           required: false
-          description: "Enter the IronFunctions API URL. (Default: http://127.0.0.1:8080)"
+          description: "The IronFunctions API URL. In a production environment, this would be your load balancer URL. (Default: http://127.0.0.1:8080)."
         - name: port
           type: string
           label: PORT
           required: false
           initial: 8080
-          description: "The port to run on. (Default: 8080)"
-        - name: numAsync
-          type: integer
-          label: NUM_ASYNC
-          required: false
-          initial: 1
-          description: "The number of async runners in the functions process. (Default: 1)"
+          description: "The port for the app to run on. (Default: 8080)"
         - name: logLevel
           type: string
           label: LOG_LEVEL
           required: false
           initial: "INFO"
           description: "Set to DEBUG to enable debugging. (Default: INFO)"
+        - name: dbUrl
+          type: string
+          label: DB_URL
+          required: false
+          description: "The database URL to use in URL format. (Default: BoltDB)"
+        - name: mqUrl
+          type: string
+          label: MQ_URL
+          required: false
+          description: "The message queue to use in URL format. (Default: BoltDB)"
         - name: publish
           type: boolean
           label: Visible from outside
