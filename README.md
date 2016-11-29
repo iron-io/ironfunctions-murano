@@ -18,6 +18,11 @@ for setting up a lab environment.
 
 Note: some details may differ depending on which OpenStack release you are using. For this guide, we are using Mitaka.
 
-1. From the Horizon UI dashboard, select Manage -> Packages
-
-2. Import Package
+1. Log in to the OpenStack dashboard.
+2. Navigate to Applications > Manage > Packages.
+3. Click on the Import Package button.
+4. Select the Package Source in the Import Package menu.
+    * URL (http://storage.apps.openstack.org/apps/)
+    * Zip file
+        * Run [`build.sh`](build.sh) and upload the correspending zip file.
+5. Deploy an application (http://docs.openstack.org/developer/murano/enduser-guide/quickstart/quickstart.html#deploy-an-application)
