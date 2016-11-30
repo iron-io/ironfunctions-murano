@@ -61,8 +61,8 @@ Methods:
       - $._env[API_URL]: $.apiUrl
       - $._env[PORT]: $.port
       - $._env[LOG_LEVEL]: $.logLevel
-      - $_.env[DB_URL]: $.dbUrl
-      - $_.env[MQ_URL]: $.mqUrl
+      - $._env[DB_URL]: $.dbUrl
+      - $._env[MQ_URL]: $.mqUrl
 
       - Return:
           name: $.name
