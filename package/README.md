@@ -23,6 +23,6 @@ Note: some details may differ depending on which OpenStack release you are using
 3. Click on the Import Package button.
 4. Select the Package Source in the Import Package menu.
     * URL (http://storage.apps.openstack.org/apps/)
-    * Zip file
-        * Run [`build.sh`](build.sh) and upload the correspending zip file.
+    * Zip file (make changes locally and upload custom zip)
+        * cd to package directory and run `zip -r ironfunctions.zip`
 5. Deploy an application (http://docs.openstack.org/developer/murano/enduser-guide/quickstart/quickstart.html#deploy-an-application)
