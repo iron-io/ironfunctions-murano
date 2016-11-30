@@ -44,10 +44,12 @@ Properties:
     Default: 'INFO'
 
   dbUrl:
-    Contract: $.string()
+    Contract: $.string().notNull()
+    Default: 'bolt:///functions/data/bolt.db'
 
   mqUrl:
-    Contract: $.string()
+    Contract: $.string().notNull()
+    Default: 'bolt:///functions/data/worker_mq.db'
 
 Methods:
   .init:
