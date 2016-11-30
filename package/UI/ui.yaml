@@ -53,7 +53,7 @@ Forms:
           description: "The Docker image name for the app"
         - name: apiUrl
           type: string
-          label: API_URL
+          label: API URL
           required: false
           description: "The IronFunctions API URL. In a production environment, this would be your load balancer URL. (Default: http://127.0.0.1:8080)."
         - name: port
@@ -64,23 +64,22 @@ Forms:
           description: "The port for the app to run on. (Default: 8080)"
         - name: logLevel
           type: string
-          label: LOG_LEVEL
+          label: Log Level
           required: false
           initial: "INFO"
           description: "Set to DEBUG to enable debugging. (Default: INFO)"
         - name: dbUrl
           type: string
-          label: DB_URL
+          label: DB URL
           required: false
           description: "The database URL to use in URL format. (Default: BoltDB)"
         - name: mqUrl
           type: string
-          label: MQ_URL
+          label: MQ URL
           required: false
           description: "The message queue to use in URL format. (Default: BoltDB)"
         - name: publish
           type: boolean
-          label: Visible from outside
+          hidden: true
           required: false
           initial: true
-          description: "Check if you intend to access the application from the internet"
