@@ -16,29 +16,40 @@ for setting up a lab environment.
 
 ### Getting started
 
-Note: some details may differ depending on which OpenStack release you are using. For this guide, we are using Mitaka.
+Note: some details may differ depending on which OpenStack release you are using. For this guide, we are running Mitaka.
 
 1. Log in to the OpenStack dashboard.
+
 2. Navigate to Applications > Manage > Packages.
+
 3. Click on the Import Package button.
+
 4. Select the Package Source in the Import Package menu.
+
     * URL (http://storage.apps.openstack.org/apps/)
     * Zip file (make changes locally and upload custom zip)
         * cd to package directory and run `zip -r ironfunctions.zip`
-5. Deploy an application to an environment
 
-* Add IronFunctions application component
+5. Deploy IronFunctions to an environment
 
-![Alt text](https://monosnap.com/file/okURrogUAKbjYWiEmTr30GkqS91iW0.png)
+    * Add the IronFunctions application component
 
-* For 'Container Host' select 'Docker Standalone Host'
+    ![Alt text](https://monosnap.com/file/okURrogUAKbjYWiEmTr30GkqS91iW0.png)
 
-![Alt text](https://monosnap.com/file/HQfox1M5Q6dsftgoSO1R8yaAJHpwId.png)
+    * Select 'Container Host', either 'Docker Standalone Host' or 'Kubernetes Pod'. For the simplicity of this example, we will select 'Docker Standalone Host'.
 
-* Follow the prompts to configure the Docker host and click 'Create'
-![Alt text](https://monosnap.com/file/tbA0aJZCLm8ABVb00f73Zi3xQaQdMV.png)
+    ![Alt text](https://monosnap.com/file/HQfox1M5Q6dsftgoSO1R8yaAJHpwId.png)
 
-![Alt text](https://monosnap.com/file/f21gUMbwrPl4FFaacywZ2yFhx46ufO.png)
+    * Follow the prompts to configure the Docker host and hit 'Create'
 
-* Select 'Deploy This Environment'
-![Alt text](https://monosnap.com/file/9b3BQyRYUypXI3l23KWujan5lNBKxg.png)
+    ![Alt text](https://monosnap.com/file/tbA0aJZCLm8ABVb00f73Zi3xQaQdMV.png)
+
+    ![Alt text](https://monosnap.com/file/f21gUMbwrPl4FFaacywZ2yFhx46ufO.png)
+
+    * Select 'Deploy This Environment'
+
+    ![Alt text](https://monosnap.com/file/9b3BQyRYUypXI3l23KWujan5lNBKxg.png)
+
+    * Murano will create a new VM, install Docker, pull down the image for IronFunctions, and start the application.
+
+    ![Alt text](https://monosnap.com/file/R7pfGWZXv9jNnCa4ejuHX2L4iSmkEi.png)
