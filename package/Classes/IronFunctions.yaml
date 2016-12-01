@@ -45,7 +45,7 @@ Properties:
 
   dbUrl:
     Contract: $.string().notNull()
-    Default: 'bolt:///functions/data/bolt.db'
+    Default: 'bolt:///functions/data/bolt.db?bucket=funcs'
 
   mqUrl:
     Contract: $.string().notNull()
