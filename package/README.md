@@ -14,7 +14,7 @@ for setting up a lab environment.
 * Kubernetes
     * Run Docker applications in a clustered environment on Kubernetes pods.
 
-### Getting started (stable/mitaka release)
+### Getting started
 
 Note: some details may differ depending on which OpenStack release you are using. For this guide, we are using Mitaka.
 
@@ -25,4 +25,20 @@ Note: some details may differ depending on which OpenStack release you are using
     * URL (http://storage.apps.openstack.org/apps/)
     * Zip file (make changes locally and upload custom zip)
         * cd to package directory and run `zip -r ironfunctions.zip`
-5. Deploy an application (http://docs.openstack.org/developer/murano/enduser-guide/quickstart/quickstart.html#deploy-an-application)
+5. Deploy an application to an environment
+
+* Add IronFunctions application component
+
+![Alt text](https://monosnap.com/file/okURrogUAKbjYWiEmTr30GkqS91iW0.png)
+
+* For 'Container Host' select 'Docker Standalone Host'
+
+![Alt text](https://monosnap.com/file/HQfox1M5Q6dsftgoSO1R8yaAJHpwId.png)
+
+* Follow the prompts to configure the Docker host and click 'Create'
+![Alt text](https://monosnap.com/file/tbA0aJZCLm8ABVb00f73Zi3xQaQdMV.png)
+
+![Alt text](https://monosnap.com/file/f21gUMbwrPl4FFaacywZ2yFhx46ufO.png)
+
+* Select 'Deploy This Environment'
+![Alt text](https://monosnap.com/file/9b3BQyRYUypXI3l23KWujan5lNBKxg.png)
