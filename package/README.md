@@ -4,7 +4,8 @@ Murano application package for [IronFunctions](https://github.com/iron-io/functi
 
 ## Quick Start Guide
 
-This guide assumes you have Murano installed. See the [Murano docs](http://murano.readthedocs.io/en/stable-kilo/install/index.html#prepare-a-lab-for-murano)
+This guide assumes you have Murano installed. See the
+[Murano docs](http://murano.readthedocs.io/en/stable-kilo/install/index.html#prepare-a-lab-for-murano)
 for setting up a lab environment.
 
 ### Supported container management platforms
@@ -16,45 +17,108 @@ for setting up a lab environment.
 
 ### Getting started
 
-Note: some details may differ depending on which OpenStack release you are using. For this guide, we are running Mitaka.
+Note: some details may differ depending on which OpenStack release you are using.
+For this guide, we are running Mitaka.
 
 1. Log in to the OpenStack dashboard.
 
 2. Navigate to Applications > Manage > Packages.
 
-3. Click on the Import Package button.
+3. Click on the __Import Package__ button.
 
-4. Select the Package Source in the Import Package menu.
+4. Select an option for __Package Source__ in the menu.
 
     * URL (http://storage.apps.openstack.org/apps/)
     * Zip file (make changes locally and upload custom zip)
         * cd to package directory and run `zip -r ironfunctions.zip`
 
-5. Deploy IronFunctions to an environment
+5. Deploy IronFunctions to an OpenStack compute environment
 
     * Add the IronFunctions application component
 
-    ![Alt text](https://monosnap.com/file/okURrogUAKbjYWiEmTr30GkqS91iW0.png)
+    ![Alt text](https://monosnap.com/file/xEiDqs22ydcYXkO2ClBRtsU2Vi6aRt.png)
 
-    * Select 'Container Host', either 'Docker Standalone Host' or 'Kubernetes Pod'. For the simplicity of this example, we will select 'Docker Standalone Host'.
+    * Select __Container Host__, either __Docker Standalone Host__ or __Kubernetes Pod__.
+    For the simplicity of this example, we will select __Docker Standalone Host__.
+
+    ![Alt text](https://monosnap.com/file/u7mzH5pzr6x8JbNHmLbD6h0upNPWhn.png)
+
+    * Follow the prompts to configure the Docker host and hit __Create__.
 
     ![Alt text](https://monosnap.com/file/HQfox1M5Q6dsftgoSO1R8yaAJHpwId.png)
 
-    * Follow the prompts to configure the Docker host and hit 'Create'
-
     ![Alt text](https://monosnap.com/file/tbA0aJZCLm8ABVb00f73Zi3xQaQdMV.png)
 
-    ![Alt text](https://monosnap.com/file/f21gUMbwrPl4FFaacywZ2yFhx46ufO.png)
+    * Select __Deploy This Environment__.
 
-    * Select 'Deploy This Environment'
+    Note: To access the API publically, check your environment and enable inbound TCP
+    for the default port, 8080, or whatever port is specified in the form field in the previous step.
 
-    ![Alt text](https://monosnap.com/file/9b3BQyRYUypXI3l23KWujan5lNBKxg.png)
+    ![Alt text](https://monosnap.com/file/xLFesE2chuhYGxP1dWp5niTgyUoBVI.png)
 
-    * Murano will create a new VM, install Docker, pull down the image for IronFunctions, and start the application.
-    The deployment time will depend on your hardware and the selected instance size.
+    * Murano will create a new VM, install Docker, pull down the image for IronFunctions,
+    and start the application. The deployment time will depend on your hardware, selected
+    instance size, and size of the host OS image.
 
-    ![Alt text](https://monosnap.com/file/R7pfGWZXv9jNnCa4ejuHX2L4iSmkEi.png)
+    ![Alt text](https://monosnap.com/file/2HpGRe8ko2pBc2aE37i5xpbdAUEdm4.png)
 
-    * Once the deployment has completed. Test it out:
+    ![Alt text](https://monosnap.com/file/P8FVHd4ah9nQFiY7SZCIxPRJvfMlxn.png)
 
-        * Note the floating IP assigned to the host
+    * Once the deployment has completed. Let's test it out using cURL:
+
+        * Note the url returned in the IronFunctions component deployment status.
+        Our API url in this this case is `http://172.16.0.193:8080`
+
+        * Create a route
+
+        ```bash
+        curl -sH "Content-Type: application/json" -X POST -d '{
+            "route": {
+                "path":"/hello",
+                "image":"iron/hello"
+            }
+        }' http://172.16.0.193:8080/v1/apps/myapp/routes | jq .
+        {
+        "message": "Route successfully created",
+        "route": {
+            "app_name": "myapp",
+            "path": "/hello",
+            "image": "iron/hello",
+            "memory": 128,
+            "type": "sync",
+            "timeout": 30,
+            "config": null
+        }
+        }
+        ```
+
+        * List applications
+
+        ```bash
+        curl -s http://172.16.0.193:8080/v1/apps | jq .
+        {
+        "message": "Successfully listed applications",
+        "apps": [
+            {
+            "name": "myapp",
+            "config": null
+            }
+        ]
+        }
+        ```
+
+        * Call the function
+
+        ```bash
+        curl http://172.16.0.193:8080/r/myapp/hello
+        Hello World!
+        ```
+
+        * Pass data to the function
+
+        ```bash
+        curl -H "Content-Type: application/json" -X POST -d '{
+            "name":"OpenStack"
+        }'  http://172.16.0.193:8080/r/myapp/hello
+        Hello OpenStack!
+        ```
