@@ -11,8 +11,8 @@ for setting up a lab environment.
 
 * Docker standalone host
     * Containers are run on a dedicated VM running Docker.
-* Kubernetes
-    * Run Docker applications in a clustered environment on Kubernetes pods.
+* Kubernetes pod
+    * Run Docker applications in a clustered environment on Kubernetes pod(s).
 
 ### Getting started
 
@@ -51,5 +51,10 @@ Note: some details may differ depending on which OpenStack release you are using
     ![Alt text](https://monosnap.com/file/9b3BQyRYUypXI3l23KWujan5lNBKxg.png)
 
     * Murano will create a new VM, install Docker, pull down the image for IronFunctions, and start the application.
+    The deployment time will depend on your hardware and the selected instance size.
 
     ![Alt text](https://monosnap.com/file/R7pfGWZXv9jNnCa4ejuHX2L4iSmkEi.png)
+
+    * Once the deployment has completed. Test it out:
+
+        * Note the floating IP assigned to the host
