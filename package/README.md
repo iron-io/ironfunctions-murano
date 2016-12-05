@@ -78,6 +78,7 @@ For this guide, we are running Mitaka.
                 "image":"iron/hello"
             }
         }' http://172.16.0.193:8080/v1/apps/myapp/routes | jq .
+
         {
         "message": "Route successfully created",
         "route": {
@@ -96,6 +97,7 @@ For this guide, we are running Mitaka.
 
         ```bash
         curl -s http://172.16.0.193:8080/v1/apps | jq .
+
         {
         "message": "Successfully listed applications",
         "apps": [
@@ -111,6 +113,7 @@ For this guide, we are running Mitaka.
 
         ```bash
         curl http://172.16.0.193:8080/r/myapp/hello
+
         Hello World!
         ```
 
@@ -120,5 +123,6 @@ For this guide, we are running Mitaka.
         curl -H "Content-Type: application/json" -X POST -d '{
             "name":"OpenStack"
         }'  http://172.16.0.193:8080/r/myapp/hello
+
         Hello OpenStack!
         ```
