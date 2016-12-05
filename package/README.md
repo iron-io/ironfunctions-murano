@@ -15,6 +15,12 @@ for setting up a lab environment.
 * Kubernetes pod
     * Run Docker applications in a clustered environment on Kubernetes pod(s).
 
+### Considerations
+
+* For optimal performance, see the docs on [Docker configuration](https://github.com/iron-io/functions/blob/master/docs/operating/docker.md)
+* Note that there is currently no Ubuntu 16.04 image in the OpenStack app-catalog, so for this guide we will be using Ubuntu 14.04, with AUFS,
+pre-installed with the Murano-agent and Docker 1.12.
+
 ### Getting started
 
 Note: some details may differ depending on which OpenStack release you are using.
