@@ -70,65 +70,45 @@ For this guide, we are running Mitaka.
 
     ![Alt text](https://monosnap.com/file/P8FVHd4ah9nQFiY7SZCIxPRJvfMlxn.png)
 
-    * Once the deployment has completed. Let's test it out using cURL:
+### Once the deployment has completed, let's test it out!
 
-        * Note the url returned in the IronFunctions component deployment status.
-        Our API url in this this case is `http://172.16.0.193:8080`
+Note the URL returned in the IronFunctions component deployment status. Our API URL in this this case is `http://172.16.0.193:8080`
 
-        * Create a route
+```sh
+export API_URL=http://172.16.0.193:8080
+```
 
-        ```bash
-        curl -sH "Content-Type: application/json" -X POST -d '{
-            "route": {
-                "path":"/hello",
-                "image":"iron/hello"
-            }
-        }' http://172.16.0.193:8080/v1/apps/myapp/routes | jq .
+#### Install the IronFunctions CLI tool:
 
-        {
-        "message": "Route successfully created",
-        "route": {
-            "app_name": "myapp",
-            "path": "/hello",
-            "image": "iron/hello",
-            "memory": 128,
-            "type": "sync",
-            "timeout": 30,
-            "config": null
-        }
-        }
-        ```
+```sh
+curl -sSL http://get.iron.io/fn | sh
+```
 
-        * List applications
 
-        ```bash
-        curl -s http://172.16.0.193:8080/v1/apps | jq .
+#### Create an application
 
-        {
-        "message": "Successfully listed applications",
-        "apps": [
-            {
-            "name": "myapp",
-            "config": null
-            }
-        ]
-        }
-        ```
+```sh
+fn apps create myapp
+```
 
-        * Call the function
+#### Add a route
 
-        ```bash
-        curl http://172.16.0.193:8080/r/myapp/hello
+```sh
+fn routes create myapp /hello iron/hello
+```
 
-        Hello World!
-        ```
+#### Call the function
 
-        * Pass data to the function
+```sh
+fn call myapp /hello
+```
 
-        ```bash
-        curl -H "Content-Type: application/json" -X POST -d '{
-            "name":"OpenStack"
-        }'  http://172.16.0.193:8080/r/myapp/hello
+#### Pass data to the function
 
-        Hello OpenStack!
-        ```
+```sh
+echo '{"name":"OpenStack"}' | fn call myapp /hello
+```
+
+You should see it say Hello OpenStack! now instead of Hello World!.
+
+See [Writing Functions](https://github.com/iron-io/functions/blob/master/docs/writing.md) for more information.
