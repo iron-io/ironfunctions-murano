@@ -34,7 +34,7 @@ For this guide, we are running Mitaka.
 
 4. Select an option for __Package Source__ in the menu.
 
-    * URL (http://storage.apps.openstack.org/apps/)
+    * URL (http://apps.openstack.org/#tab=murano-apps&asset=IronFunctions)
     * Zip file (make changes locally and upload custom zip)
         * cd to package directory and run `zip -r ironfunctions.zip`
 
